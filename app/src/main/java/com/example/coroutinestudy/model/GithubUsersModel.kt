@@ -2,7 +2,7 @@ package com.example.coroutinestudy.model
 
 import com.google.gson.annotations.SerializedName
 
-data class GithubRepositoryModel(
+data class GithubUsersModel(
     @SerializedName("login")
     val login: String,
     @SerializedName("node_id")
