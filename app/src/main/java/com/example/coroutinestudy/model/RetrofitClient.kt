@@ -18,7 +18,7 @@ object RetrofitClient {
     }
 
     private fun getUrl(): String{
-        return "http://api.github.com"
+        return "https://api.github.com"
     }
 
     private fun getOkHttpClient():OkHttpClient{

@@ -1,19 +1,20 @@
 package com.example.coroutinestudy.main.viewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.coroutinestudy.model.GithubUsersModel
+import androidx.lifecycle.viewModelScope
+import com.example.coroutinestudy.model.GithubUserModel
 import com.example.coroutinestudy.repository.GithubRepository
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(): ViewModel() {
-    private val _githubUsers = MutableLiveData<GithubUsersModel>()
-    val githubUsers = _githubUsers
+    private val _githubUsers = MutableLiveData<List<GithubUserModel>>()
+    val githubUsers: LiveData<List<GithubUserModel>> get() = _githubUsers
 
     fun requestGithubUsers(){
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch(Dispatchers.IO) {
             GithubRepository().getUsers()?.let { res ->
                 if(res.isSuccessful){
                     res.body()?.let {
@@ -21,6 +22,7 @@ class MainViewModel(): ViewModel() {
                     }
                 }
             }
+            // TODO: exception handling
         }
     }
 

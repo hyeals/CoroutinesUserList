@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface RetrofitApi {
     @GET("/users")
-    suspend fun getUsers(): Response<GithubUsersModel>
+    suspend fun getUsers(): Response<List<GithubUserModel>>
 }
