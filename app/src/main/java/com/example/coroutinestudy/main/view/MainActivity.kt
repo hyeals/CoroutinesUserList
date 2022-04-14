@@ -3,6 +3,7 @@ package com.example.coroutinestudy.main.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coroutinestudy.R
@@ -30,6 +31,10 @@ class MainActivity : AppCompatActivity() {
         binding.rvMain.adapter = adapter
         binding.rvMain.layoutManager = LinearLayoutManager(applicationContext)
 
+
+        viewModel.requestGithubUsers()
+
+        // observing
         viewModel.githubUsers.observe(this){
             if(it != null){
                 adapter.setUpdateDatas(viewModel.githubUsers.value!!)
@@ -37,8 +42,13 @@ class MainActivity : AppCompatActivity() {
                 Log.d("this!!!", "this null value")
             }
         }
-
-        viewModel.requestGithubUsers()
+        viewModel.requestGithubUsersSuccess.observe(this){
+            if(it){
+                binding.progressBar.visibility = View.GONE
+            }else{
+                binding.progressBar.visibility = View.VISIBLE
+            }
+        }
 
     }
 }
