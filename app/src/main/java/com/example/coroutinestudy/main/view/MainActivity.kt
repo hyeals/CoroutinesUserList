@@ -5,13 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coroutinestudy.R
 import com.example.coroutinestudy.databinding.ActivityMainBinding
 import com.example.coroutinestudy.main.adapter.GithubUsersAdapter
 import com.example.coroutinestudy.main.viewModel.MainViewModel
+import com.example.coroutinestudy.model.GithubUserModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -34,21 +38,23 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.requestGithubUsers()
 
-        // observing
-        viewModel.githubUsers.observe(this){
-            if(it != null){
-                adapter.setUpdateDatas(viewModel.githubUsers.value!!)
-            }else{
-                Log.d("this!!!", "this null value")
+        // collecting
+        with(viewModel){
+            githubUsers.asLiveData().observe(this@MainActivity){
+                if(it != null){
+                    adapter.setUpdateDatas(viewModel.githubUsers.value)
+                }else{
+                    Log.d("this!!!", "this null value")
+                }
             }
-        }
-        viewModel.requestGithubUsersSuccess.observe(this){
-            if(it){
-                binding.progressBar.visibility = View.GONE
-            }else{
-                binding.progressBar.visibility = View.VISIBLE
+            requestGithubUsersSuccess.asLiveData().observe(this@MainActivity){
+                if(it){
+                    binding.progressBar.visibility = View.GONE
+                }else{
+                    binding.progressBar.visibility = View.VISIBLE
+                }
             }
-        }
 
+        }
     }
 }
