@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.requestGithubUsers()
 
-        // collecting
+        // collect
         with(viewModel){
             githubUsers.asLiveData().observe(this@MainActivity){
                 if(it != null){
