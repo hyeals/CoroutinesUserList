@@ -2,6 +2,7 @@ package com.example.coroutinestudy.main.view
 
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -9,16 +10,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coroutinestudy.databinding.ActivityMainBinding
 import com.example.coroutinestudy.main.adapter.GithubUsersAdapter
 import com.example.coroutinestudy.main.viewModel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+//        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.viewmodel = viewModel
