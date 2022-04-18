@@ -1,9 +1,9 @@
 package com.example.coroutinestudy.repository
 
-import com.example.coroutinestudy.model.RetrofitClient
+import com.example.coroutinestudy.model.GithubUserModel
+import retrofit2.Response
 
-class GithubRepository {
-    private val retrofitClient = RetrofitClient.getService()
+interface GithubRepository {
 
-    suspend fun getUsers() = retrofitClient.getUsers()
+    suspend fun getUsers(): Response<List<GithubUserModel>>
 }
