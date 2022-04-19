@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
@@ -32,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvMain.adapter = adapter
         binding.rvMain.layoutManager = LinearLayoutManager(applicationContext)
 
-
+        // call gitHubUsers
         viewModel.requestGithubUsers()
 
         // collect
