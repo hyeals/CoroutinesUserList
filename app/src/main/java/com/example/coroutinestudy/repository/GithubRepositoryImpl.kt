@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class GithubRepositoryImpl @Inject constructor(private val remoteDataSource: GithubRemoteDataSource): GithubRepository {
 
-    override suspend fun getUsers(): List<GithubUserModel> {
+    override suspend fun getUsers(): Response<List<GithubUserModel>> {
         return remoteDataSource.getUsers()
     }
 

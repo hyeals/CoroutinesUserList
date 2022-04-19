@@ -11,7 +11,7 @@ interface GithubRemoteDataSource {
      * 유저 정보를 반환합니다.
      * @return [List<GithubUserModel>] 유저 리스트
      * */
-    suspend fun getUsers(): List<GithubUserModel>
+    suspend fun getUsers(): Response<List<GithubUserModel>>
 
 }
 
@@ -20,7 +20,7 @@ class GithubRemoteDataSourceImpl @Inject constructor(): GithubRemoteDataSource{
         private val retrofitClient = RetrofitClient.getService()
     }
 
-    override suspend fun getUsers(): List<GithubUserModel> {
+    override suspend fun getUsers(): Response<List<GithubUserModel>> {
         return retrofitClient.getUsers()
     }
 
