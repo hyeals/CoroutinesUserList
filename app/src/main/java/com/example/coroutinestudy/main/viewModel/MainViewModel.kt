@@ -26,11 +26,14 @@ class MainViewModel @Inject constructor(private val githubRepository: GithubRepo
     fun requestGithubUsers(){
         viewModelScope.launch(Dispatchers.IO) {
             githubRepository.getUsers().let { res ->
-                try {
-                    _githubUsers.value = res
-                    _requestGithubUsersSuccess.value = true
-                }catch (e: Exception){
+                if(res.isSuccessful){
+                    res.body()?.let {
+                        _githubUsers.value = it
+                        _requestGithubUsersSuccess.value = true
+                    }
+                }else{
                     _requestGithubUsersSuccess.value = false
+                    println("this!!!")
                 }
             }
         }

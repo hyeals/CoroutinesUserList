@@ -5,5 +5,5 @@ import retrofit2.Response
 
 interface GithubRepository {
 
-    suspend fun getUsers(): List<GithubUserModel>
+    suspend fun getUsers(): Response<List<GithubUserModel>>
 }
