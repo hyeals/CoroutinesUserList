@@ -9,7 +9,7 @@ object RetrofitClient {
 
     fun getService() = getClient().create(RetrofitApi::class.java)
 
-    private fun getClient(): Retrofit{
+    private fun getClient(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(getUrl())
             .client(getOkHttpClient())
@@ -17,14 +17,16 @@ object RetrofitClient {
             .build()
     }
 
-    private fun getUrl(): String{
+    private fun getUrl(): String {
         return "https://api.github.com"
     }
 
-    private fun getOkHttpClient():OkHttpClient{
+    private fun getOkHttpClient(): OkHttpClient {
         return OkHttpClient().newBuilder()
-            .addNetworkInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }).build()
+            .addNetworkInterceptor(
+                HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                }
+            ).build()
     }
 }

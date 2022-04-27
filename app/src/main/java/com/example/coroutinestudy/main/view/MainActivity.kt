@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coroutinestudy.databinding.ActivityMainBinding
@@ -34,11 +33,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.requestGithubUsers()
 
         // collect
-        with(viewModel){
-            githubUsers.asLiveData().observe(this@MainActivity){
-                if(it != null){
+        with(viewModel) {
+            githubUsers.asLiveData().observe(this@MainActivity) {
+                if (it != null) {
                     adapter.setUpdateDatas(viewModel.githubUsers.value)
-                }else{
+                } else {
                     Log.d("this!!!", "this null value")
                 }
             }
