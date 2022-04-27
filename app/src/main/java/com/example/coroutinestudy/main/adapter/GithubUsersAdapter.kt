@@ -8,11 +8,11 @@ import com.example.coroutinestudy.R
 import com.example.coroutinestudy.main.holder.GithubUsersHolder
 import com.example.coroutinestudy.model.GithubUserModel
 
-class GithubUsersAdapter(): RecyclerView.Adapter<GithubUsersHolder>(){
+class GithubUsersAdapter() : RecyclerView.Adapter<GithubUsersHolder>() {
     var data = mutableListOf<GithubUserModel>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setUpdateDatas(data: List<GithubUserModel>){
+    fun setUpdateDatas(data: List<GithubUserModel>) {
         this.data = data.toMutableList()
         notifyDataSetChanged()
     }
@@ -34,5 +34,4 @@ class GithubUsersAdapter(): RecyclerView.Adapter<GithubUsersHolder>(){
     override fun getItemCount(): Int {
         return data.size
     }
-
 }
