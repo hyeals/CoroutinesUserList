@@ -12,7 +12,10 @@ import com.example.coroutinestudy.databinding.ActivityMainBinding
 import com.example.coroutinestudy.main.adapter.GithubUsersAdapter
 import com.example.coroutinestudy.main.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
@@ -41,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         with(viewModel) {
             lifecycleScope.launch {
                 githubUsers.onEach {
-                    if(it != null){
+                    if(it.isNotEmpty()){
                         adapter.setUpdateDatas(viewModel.githubUsers.value)
                     }else{
                         Log.d("this!!!", "this null value")
